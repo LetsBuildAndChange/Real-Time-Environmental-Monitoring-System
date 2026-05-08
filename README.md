@@ -1,62 +1,38 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- | -------- |
+# ESP32 Real-Time Environmental Monitoring System
 
-# ADC Single Read Example
+Embedded system built with ESP-IDF to monitor temperature, humidity, and light in real time. The system reads sensor data, smooths noisy inputs, displays live values on an I2C LCD, and triggers alerts when environmental conditions cross defined thresholds.
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## Features
+- Sensor data acquisition using DHT11 and ADC-based light sensor
+- Moving average filtering to reduce noise and stabilize readings
+- Hysteresis-based alerting to prevent rapid alert toggling near thresholds
+- Real-time display output using I2C LCD
+- GPIO-based alert output for visual indication
+- Hardware/software debugging during sensor and LCD integration
 
-This example demonstrates the following:
+## How It Works
+1. Reads temperature and humidity from the DHT11 sensor.
+2. Reads light level using an ADC-based sensor.
+3. Applies moving average filtering to stabilize sensor values.
+4. Uses threshold logic with hysteresis to determine alert state.
+5. Displays current readings and alert status on the I2C LCD.
 
-- How to obtain a oneshot ADC reading from a GPIO pin using the ADC oneshot mode driver
-- How to use the ADC Calibration functions to obtain a calibrated result (in mV)
+## Tech Stack
+- C
+- ESP-IDF
+- ESP32
+- I2C communication
+- GPIO
+- ADC
 
-## How to use example
+## Key Challenges
+- Handling noisy sensor input from real-world readings
+- Preventing unstable alert behavior near threshold boundaries
+- Debugging sensor communication and I2C LCD interfacing issues
+- Separating hardware wiring issues from software logic bugs
 
-### Hardware Required
-
-* A development board with ESP SoC
-* A USB cable for power supply and programming
-
-In this example, you need to connect a voltage source (e.g. a DC power supply) to the GPIO pins specified in `oneshot_read_main.c` (see the macros defined on the top of the source file). Feel free to modify the pin setting.
-
-### Build and Flash
-
-Build the project and flash it to the board, then run monitor tool to view serial output:
-
-```
-idf.py -p PORT flash monitor
-```
-
-(To exit the serial monitor, type ``Ctrl-]``.)
-
-See the Getting Started Guide for full steps to configure and use ESP-IDF to build projects.
-
-## Example Output
-
-Running this example, you will see the following log output on the serial monitor:
-
-```
-I (304) ADC_ONESHOT: calibration scheme version is Curve Fitting
-I (304) ADC_ONESHOT: calibration scheme version is Curve Fitting
-I (314) ADC_ONESHOT: ADC1 Channel[2] Raw Data: 0
-I (314) ADC_ONESHOT: ADC1 Channel[2] Cali Voltage: 0 mV
-I (1324) ADC_ONESHOT: ADC1 Channel[3] Raw Data: 664
-I (1324) ADC_ONESHOT: ADC1 Channel[3] Cali Voltage: 559 mV
-I (2324) ADC_ONESHOT: ADC2 Channel[0] Raw Data: 580
-I (2324) ADC_ONESHOT: ADC2 Channel[0] Cali Voltage: 498 mV
-I (3324) ADC_ONESHOT: ADC1 Channel[2] Raw Data: 0
-I (3324) ADC_ONESHOT: ADC1 Channel[2] Cali Voltage: 0 mV
-I (4324) ADC_ONESHOT: ADC1 Channel[3] Raw Data: 666
-I (4324) ADC_ONESHOT: ADC1 Channel[3] Cali Voltage: 561 mV
-I (5324) ADC_ONESHOT: ADC2 Channel[0] Raw Data: 575
-I (5324) ADC_ONESHOT: ADC2 Channel[0] Cali Voltage: 495 mV
-...
-```
-
-## Troubleshooting
-
-If following warning is printed out, it means the calibration required eFuse bits are not burnt correctly on your board. The calibration will be skipped. Only raw data will be printed out.
-```
-W (300) ADC_ONESHOT: eFuse not burnt, skip calibration
-I (1310) ADC_ONESHOT: ADC1 Channel[2] Raw Data: 0
-```
+## What I Learned
+- How to structure an embedded application using ESP-IDF
+- How to process noisy sensor data in real time
+- How hysteresis improves system stability
+- How to debug hardware/software integration issues
