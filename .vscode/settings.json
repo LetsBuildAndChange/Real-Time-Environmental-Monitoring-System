@@ -1,0 +1,19 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.openOcdConfigs": [
+    "board/esp32-wrover-kit-3.3v.cfg"
+  ],
+  "idf.port": "/dev/tty.usbserial-110",
+  "idf.currentSetup": "/Users/eitanabrishami/esp/v5.5.2/esp-idf",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32"
+  },
+  "clangd.path": "/Users/eitanabrishami/.espressif/tools/esp-clang/esp-19.1.2_20250312/esp-clang/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=/Users/eitanabrishami/Downloads/EmbeddedSystems-EspIf-Projects/PracticeOneShotRead/build"
+  ],
+  "idf.flashType": "UART",
+  "C_Cpp.errorSquiggles": "disabled"
+}
